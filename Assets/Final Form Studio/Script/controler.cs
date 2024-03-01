@@ -3,6 +3,7 @@ using UnityEngine;
 public class ControladorCarro : MonoBehaviour
 {
     public float velocidad = 5f; // Velocidad de movimiento del carro
+    public float velocidadRotacion = 100f; // Velocidad de rotación del carro
 
     void Update()
     {
@@ -13,7 +14,7 @@ public class ControladorCarro : MonoBehaviour
         // Calcular el vector de dirección basado en las entradas
         Vector3 direccion = new Vector3(horizontal, 0f, vertical).normalized;
 
-        // Mover el carro en la dirección calculada
+        // Mover y rotar el carro en la dirección calculada
         MoverCarro(direccion);
     }
 
@@ -25,17 +26,19 @@ public class ControladorCarro : MonoBehaviour
         // Calcular el vector de movimiento
         Vector3 movimiento = direccion * velocidad * Time.deltaTime;
 
-        //Se transforma el collider del carro para rotarlo según si va a la derecha o izquierda
+        // Aplicar el movimiento al Rigidbody
+        rb.MovePosition(rb.position + movimiento);
+
+        // Calcular la rotación en función de la entrada horizontal
         if (direccion.x > 0)
         {
-            transform.rotation = Quaternion.Euler(0, 90, 0);
+            // Rotar gradualmente hacia la derecha
+            transform.Rotate(Vector3.up, velocidadRotacion * Time.deltaTime);
         }
         else if (direccion.x < 0)
         {
-            transform.rotation = Quaternion.Euler(0, -90, 0);
+            // Rotar gradualmente hacia la izquierda
+            transform.Rotate(Vector3.up, -velocidadRotacion * Time.deltaTime);
         }
-
-        // Aplicar el movimiento al Rigidbody
-        rb.MovePosition(rb.position + movimiento);
     }
 }

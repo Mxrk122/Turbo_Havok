@@ -7,7 +7,7 @@ public class WeaponSpawner : MonoBehaviour
     public int maxWeapons = 20; // Cantidad máxima de armas permitidas en el juego
      public float spawnRadius = 10f; // Radio en el que se generarán las armas
     public float spawnInterval = 5f; // Intervalo de tiempo entre spawns
-
+    public float maxRayDistance = 100f;//Debug
     void Start()
     {
         StartCoroutine(SpawnWeaponsCoroutine());
@@ -32,6 +32,7 @@ public class WeaponSpawner : MonoBehaviour
         randomPosition.y = 0f; // Asegúrate de que las armas estén en el plano del suelo
         randomPosition.y = 0f; // Asegúrate de que las armas estén en el plano del suelo
 
+        randomPosition = new Vector3(8.2f, 3.51f, -35.3f);
         GameObject weaponPrefab = GetRandomWeaponPrefab();
         GameObject weapon = Instantiate(weaponPrefab, randomPosition, Quaternion.identity);
         weapon.transform.rotation = Quaternion.Euler(0f, Random.Range(0f, 360f), 0f); // Gira el arma al azar

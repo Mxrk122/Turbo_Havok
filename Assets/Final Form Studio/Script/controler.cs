@@ -23,8 +23,8 @@ public class ControladorCarro : MonoBehaviour
         // Obtener el componente Rigidbody adjunto al carro
         Rigidbody rb = GetComponent<Rigidbody>();
 
-        // Calcular el vector de movimiento
-        Vector3 movimiento = direccion * velocidad * Time.deltaTime;
+        // Calcular el vector de movimiento en coordenadas globales
+        Vector3 movimiento = transform.TransformDirection(direccion) * velocidad * Time.deltaTime;
 
         // Aplicar el movimiento al Rigidbody
         rb.MovePosition(rb.position + movimiento);
@@ -41,4 +41,5 @@ public class ControladorCarro : MonoBehaviour
             transform.Rotate(Vector3.up, -velocidadRotacion * Time.deltaTime);
         }
     }
+
 }

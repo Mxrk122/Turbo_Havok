@@ -59,14 +59,17 @@ public class PowerUp : MonoBehaviour
 
     void OnTriggerStay(Collider other)
     {
-        Debug.Log(transform.parent);
-        // Verifica si el power-up ha sido recogido y si el objeto colisionado es un jugador o enemigo
-        if (isPickedUp && (other.CompareTag("Player") || other.CompareTag("Enemy")) && !other.gameObject.Equals(transform.parent))
+        if (!isPickedUp)
         {
-            // Aplica daño al objeto colisionado
-            DealDamage(other.gameObject);
+            // Verifica si el objeto con el que colisiona es un jugador o un enemigo
+            if ((other.CompareTag("Player") || other.CompareTag("Enemy")) && !other.gameObject.Equals(transform.parent))
+            {
+                // Asigna el power-up al carro
+                AssignPowerUp(other.gameObject);
+            }
         }
     }
+
 
     void DealDamage(GameObject target)
     {

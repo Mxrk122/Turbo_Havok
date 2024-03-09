@@ -4,6 +4,7 @@ public class ControladorCarro : MonoBehaviour
 {
     public float velocidad = 5f; // Velocidad de movimiento del carro
     public float velocidadRotacion = 100f; // Velocidad de rotación del carro
+    public GameObject ancla;
 
     void Update()
     {
